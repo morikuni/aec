@@ -2,6 +2,29 @@ package aec
 
 import "fmt"
 
+// EraseMode is a input for EraceXXX function.
+type EraseMode uint
+
+var (
+	// EraseModes is enumeration of EraseMode.
+	EraseModes struct {
+		// All erase all.
+		All EraseMode
+
+		// Head erase to head.
+		Head EraseMode
+
+		// Tail erase to tail.
+		Tail EraseMode
+	}
+
+	// Save saves the cursor position.
+	Save ANSI
+
+	// Restore restores the cursor position.
+	Restore ANSI
+)
+
 // Up moves up the cursor.
 func Up(n uint) ANSI {
 	if n == 0 {
@@ -60,25 +83,6 @@ func Position(row, col uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%d;%dH", row, col))
 }
 
-// EraseMode is a input for EraceXXX function.
-type EraseMode uint
-
-// EraseModes is enumeration of EraseMode.
-var EraseModes = struct {
-	// All erase all.
-	All EraseMode
-
-	// Head erase to head.
-	Head EraseMode
-
-	// Tail erase to tail.
-	Tail EraseMode
-}{
-	Tail: 0,
-	Head: 1,
-	All:  2,
-}
-
 // EraseDisplay erases display by given EraseMode.
 func EraseDisplay(m EraseMode) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dJ", m))
@@ -105,10 +109,17 @@ func ScrollDown(n int) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dT", n))
 }
 
-var (
-	// Save saves the cursor position.
-	Save = newAnsi(esc + "s")
+func init() {
+	EraseModes = struct {
+		All  EraseMode
+		Head EraseMode
+		Tail EraseMode
+	}{
+		Tail: 0,
+		Head: 1,
+		All:  2,
+	}
 
-	// Restore restores the cursor position.
+	Save = newAnsi(esc + "s")
 	Restore = newAnsi(esc + "u")
-)
+}

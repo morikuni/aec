@@ -1,11 +1,9 @@
 package aec
 
-const (
-	esc = "\x1b["
+const esc = "\x1b["
 
-	// Reset resets SGR effect.
-	Reset = esc + "0m"
-)
+// Reset resets SGR effect.
+const Reset string = "\x1b[0m"
 
 var empty = newAnsi("")
 

@@ -6,7 +6,7 @@ type Builder struct {
 }
 
 // EmptyBuilder is an initialized Builder.
-var EmptyBuilder = &Builder{empty}
+var EmptyBuilder *Builder
 
 // NewBuilder creates a Builder from existing ANSI.
 func NewBuilder(a ANSI) *Builder {
@@ -366,4 +366,8 @@ func (builder *Builder) RGB8BitF(r, g, b uint8) *Builder {
 // RGB8BitB is a syntax for Color8BitB with NewRGB8Bit.
 func (builder *Builder) RGB8BitB(r, g, b uint8) *Builder {
 	return builder.Color8BitB(NewRGB8Bit(r, g, b))
+}
+
+func init() {
+	EmptyBuilder = &Builder{empty}
 }

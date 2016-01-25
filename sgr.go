@@ -4,15 +4,15 @@ import (
 	"fmt"
 )
 
-func newSGR(n uint) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", n))
-}
-
 // RGB3Bit is a 3bit RGB color.
 type RGB3Bit uint8
 
 // RGB8Bit is a 8bit RGB color.
 type RGB8Bit uint8
+
+func newSGR(n uint) ANSI {
+	return newAnsi(fmt.Sprintf(esc+"%dm", n))
+}
 
 // NewRGB3Bit create a RGB3Bit from given RGB.
 func NewRGB3Bit(r, g, b uint8) RGB3Bit {
@@ -54,96 +54,149 @@ func FullColorB(r, g, b uint8) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"48;2;%d;%d;%dm", r, g, b))
 }
 
+// Style
 var (
 	// Bold set the text style to bold or increased intensity.
-	Bold = newSGR(1)
+	Bold ANSI
 
 	// Faint set the text style to faint.
-	Faint = newSGR(2)
+	Faint ANSI
 
 	// Italic set the text style to italic.
-	Italic = newSGR(3)
+	Italic ANSI
 
 	// Underline set the text style to underline.
-	Underline = newSGR(4)
+	Underline ANSI
 
 	// BlinkSlow set the text style to slow blink.
-	BlinkSlow = newSGR(5)
+	BlinkSlow ANSI
 
 	// BlinkRapid set the text style to rapid blink.
-	BlinkRapid = newSGR(6)
+	BlinkRapid ANSI
 
 	// Inverse swap the foreground color and background color.
-	Inverse = newSGR(7)
+	Inverse ANSI
 
 	// Conceal set the text style to conceal.
-	Conceal = newSGR(8)
+	Conceal ANSI
 
 	// CrossOut set the text style to crossed out.
-	CrossOut = newSGR(9)
-)
+	CrossOut ANSI
 
-// Set the foreground color of text.
-var (
-	BlackF   = newSGR(30)
-	RedF     = newSGR(31)
-	GreenF   = newSGR(32)
-	YellowF  = newSGR(33)
-	BlueF    = newSGR(34)
-	MagentaF = newSGR(35)
-	CyanF    = newSGR(36)
-	WhiteF   = newSGR(37)
-
-	// DefaultF is the default color of foreground.
-	DefaultF = newSGR(39)
-)
-
-// Set the background color of text.
-var (
-	BlackB   = newSGR(40)
-	RedB     = newSGR(41)
-	GreenB   = newSGR(42)
-	YellowB  = newSGR(43)
-	BlueB    = newSGR(44)
-	MagentaB = newSGR(45)
-	CyanB    = newSGR(46)
-	WhiteB   = newSGR(47)
-
-	// DefaultB is the default color of background.
-	DefaultB = newSGR(49)
-)
-
-var (
 	// Frame set the text style to framed.
-	Frame = newSGR(51)
+	Frame ANSI
 
 	// Encircle set the text style to encircled.
-	Encircle = newSGR(52)
+	Encircle ANSI
 
 	// Overline set the text style to overlined.
+	Overline ANSI
+)
+
+// Foreground color of text.
+var (
+	// DefaultF is the default color of foreground.
+	DefaultF ANSI
+
+	// Normal color
+	BlackF   ANSI
+	RedF     ANSI
+	GreenF   ANSI
+	YellowF  ANSI
+	BlueF    ANSI
+	MagentaF ANSI
+	CyanF    ANSI
+	WhiteF   ANSI
+
+	// Bright color
+	LightBlackF   ANSI
+	LightRedF     ANSI
+	LightGreenF   ANSI
+	LightYellowF  ANSI
+	LightBlueF    ANSI
+	LightMagentaF ANSI
+	LightCyanF    ANSI
+	LightWhiteF   ANSI
+)
+
+// Background color of text.
+var (
+	// DefaultB is the default color of background.
+	DefaultB ANSI
+
+	// Normal color
+	BlackB   ANSI
+	RedB     ANSI
+	GreenB   ANSI
+	YellowB  ANSI
+	BlueB    ANSI
+	MagentaB ANSI
+	CyanB    ANSI
+	WhiteB   ANSI
+
+	// Bright color
+	LightBlackB   ANSI
+	LightRedB     ANSI
+	LightGreenB   ANSI
+	LightYellowB  ANSI
+	LightBlueB    ANSI
+	LightMagentaB ANSI
+	LightCyanB    ANSI
+	LightWhiteB   ANSI
+)
+
+func init() {
+	Bold = newSGR(1)
+	Faint = newSGR(2)
+	Italic = newSGR(3)
+	Underline = newSGR(4)
+	BlinkSlow = newSGR(5)
+	BlinkRapid = newSGR(6)
+	Inverse = newSGR(7)
+	Conceal = newSGR(8)
+	CrossOut = newSGR(9)
+
+	BlackF = newSGR(30)
+	RedF = newSGR(31)
+	GreenF = newSGR(32)
+	YellowF = newSGR(33)
+	BlueF = newSGR(34)
+	MagentaF = newSGR(35)
+	CyanF = newSGR(36)
+	WhiteF = newSGR(37)
+
+	DefaultF = newSGR(39)
+
+	BlackB = newSGR(40)
+	RedB = newSGR(41)
+	GreenB = newSGR(42)
+	YellowB = newSGR(43)
+	BlueB = newSGR(44)
+	MagentaB = newSGR(45)
+	CyanB = newSGR(46)
+	WhiteB = newSGR(47)
+
+	DefaultB = newSGR(49)
+
+	Frame = newSGR(51)
+	Encircle = newSGR(52)
 	Overline = newSGR(53)
-)
 
-// Set the foreground color of text brightly.
-var (
-	LightBlackF   = newSGR(90)
-	LightRedF     = newSGR(91)
-	LightGreenF   = newSGR(92)
-	LightYellowF  = newSGR(93)
-	LightBlueF    = newSGR(94)
+	LightBlackF = newSGR(90)
+	LightRedF = newSGR(91)
+	LightGreenF = newSGR(92)
+	LightYellowF = newSGR(93)
+	LightBlueF = newSGR(94)
 	LightMagentaF = newSGR(95)
-	LightCyanF    = newSGR(96)
-	LightWhiteF   = newSGR(97)
-)
+	LightCyanF = newSGR(96)
+	LightWhiteF = newSGR(97)
 
-// Set the background color of text brightly.
-var (
-	LightBlackB   = newSGR(100)
-	LightRedB     = newSGR(101)
-	LightGreenB   = newSGR(102)
-	LightYellowB  = newSGR(103)
-	LightBlueB    = newSGR(104)
+	LightBlackB = newSGR(100)
+	LightRedB = newSGR(101)
+	LightGreenB = newSGR(102)
+	LightYellowB = newSGR(103)
+	LightBlueB = newSGR(104)
 	LightMagentaB = newSGR(105)
-	LightCyanB    = newSGR(106)
-	LightWhiteB   = newSGR(107)
-)
+	LightCyanB = newSGR(106)
+	LightWhiteB = newSGR(107)
+}
