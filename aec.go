@@ -2,11 +2,11 @@ package aec
 
 import "fmt"
 
-// EraseMode is a input for EraceXXX function.
+// EraseMode is listed in a variable EraseModes.
 type EraseMode uint
 
 var (
-	// EraseModes is enumeration of EraseMode.
+	// EraseModes is a list of EraseMode.
 	EraseModes struct {
 		// All erase all.
 		All EraseMode
