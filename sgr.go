@@ -108,7 +108,7 @@ var (
 	CyanF    ANSI
 	WhiteF   ANSI
 
-	// Bright color
+	// Light color
 	LightBlackF   ANSI
 	LightRedF     ANSI
 	LightGreenF   ANSI
@@ -134,7 +134,7 @@ var (
 	CyanB    ANSI
 	WhiteB   ANSI
 
-	// Bright color
+	// Light color
 	LightBlackB   ANSI
 	LightRedB     ANSI
 	LightGreenB   ANSI
