@@ -3,12 +3,12 @@ Go wrapper for ANSI escape code.
 
 ## Features
 
-ANSI escape codes depend on terminal environment.
-Some these features may not work.
+ANSI escape codes depend on terminal environment.  
+Some of these features may not work.
 
 Check [Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detail.
 
-### Moving Cursor
+### Move Cursor
 
 - `Up(n)`
 - `Down(n)`
@@ -31,7 +31,7 @@ Check [Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detai
 - `ScrollUp(n)`
 - `ScrollDown(n)`
 
-### Style
+### Font Style
 
 - `Bold`
 - `Faint`
@@ -46,7 +46,7 @@ Check [Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detai
 - `Encircle`
 - `Overline`
 
-### Color
+### Font Color
 
 Foreground color.
 
@@ -109,6 +109,13 @@ To mix these features.
 custom := aec.EmptyBuilder.Right(2).RGB8BitF(128, 255, 64).RedB().ANSI
 custom.Apply("Hello World")
 ```
+
+## Usage
+
+1. Create ANSI by `aec.XXX().With(aec.YYY())` or `aec.EmptyBuilder.XXX().YYY().ANSI`
+2. Print ANSI by `fmt.Print(ansi.Code(), "some string", aec.Reset)` or `fmt.Print(ansi.Apply("some string"))`
+
+`aec.Reset` should be added when using font style or font color features.
 
 ## Example
 
