@@ -1,4 +1,7 @@
 # aec
+
+[![GoDoc](https://godoc.org/github.com/morikuni/aec?status.svg)](https://godoc.org/github.com/morikuni/aec)
+
 Go wrapper for ANSI escape code.
 
 ## Features
