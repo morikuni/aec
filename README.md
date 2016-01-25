@@ -141,7 +141,7 @@ func main() {
 	const n = 20
 	builder := aec.EmptyBuilder
 
-	up2 := aec.PreviousLine(2)
+	up2 := aec.Up(2)
 	col := aec.Column(n + 1)
 	bar := aec.Color8BitF(aec.NewRGB8Bit(64, 255, 64))
 	label := builder.LightRedF().Underline().With(col).Right(1).ANSI
