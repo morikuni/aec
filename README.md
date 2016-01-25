@@ -116,7 +116,7 @@ custom.Apply("Hello World")
 ## Usage
 
 1. Create ANSI by `aec.XXX().With(aec.YYY())` or `aec.EmptyBuilder.XXX().YYY().ANSI`
-2. Print ANSI by `fmt.Print(ansi.Code(), "some string", aec.Reset)` or `fmt.Print(ansi.Apply("some string"))`
+2. Print ANSI by `fmt.Print(ansi, "some string", aec.Reset)` or `fmt.Print(ansi.Apply("some string"))`
 
 `aec.Reset` should be added when using font style or font color features.
 

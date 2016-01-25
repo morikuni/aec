@@ -1,5 +1,9 @@
 package aec
 
+import (
+	"fmt"
+)
+
 const esc = "\x1b["
 
 // Reset resets SGR effect.
@@ -9,8 +13,7 @@ var empty = newAnsi("")
 
 // ANSI represents ANSI escape code.
 type ANSI interface {
-	// Code returns a ANSI escape code.
-	Code() string
+	fmt.Stringer
 
 	// With adapts a given ANSI.
 	With(ANSI) ANSI
@@ -26,18 +29,14 @@ func newAnsi(s string) *ansiImpl {
 	return &r
 }
 
-func (a *ansiImpl) Code() string {
-	return string(*a)
-}
-
 func (a *ansiImpl) With(ansi ANSI) ANSI {
-	s := a.Code() + ansi.Code()
+	s := a.String() + ansi.String()
 	r := ansiImpl(s)
 	return &r
 }
 
 func (a *ansiImpl) Apply(s string) string {
-	return a.Code() + s + Reset
+	return a.String() + s + Reset
 }
 
 func (a *ansiImpl) String() string {
