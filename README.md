@@ -4,6 +4,12 @@
 
 Go wrapper for ANSI escape code.
 
+## Install
+
+```bash
+go get github.com/morikuni/aec
+```
+
 ## Features
 
 ANSI escape codes depend on terminal environment.  
