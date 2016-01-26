@@ -159,9 +159,9 @@ func main() {
 	fmt.Println()
 	fmt.Println()
 
-	for i := 0; i < n; i++ {
+	for i := 0; i <= n; i++ {
 		fmt.Print(up2)
-		fmt.Println(label.Apply(fmt.Sprint(i+1, "/", n)))
+		fmt.Println(label.Apply(fmt.Sprint(i, "/", n)))
 		fmt.Print("[")
 		fmt.Print(bar.Apply(strings.Repeat("=", i)))
 		fmt.Println(col.Apply("]"))
