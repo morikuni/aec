@@ -23,6 +23,15 @@ var (
 
 	// Restore restores the cursor position.
 	Restore ANSI
+
+	// Hide hides the cursor.
+	Hide ANSI
+
+	// Show shows the cursor.
+	Show ANSI
+
+	// Report reports the cursor position.
+	Report ANSI
 )
 
 // Up moves up the cursor.
@@ -122,4 +131,7 @@ func init() {
 
 	Save = newAnsi(esc + "s")
 	Restore = newAnsi(esc + "u")
+	Hide = newAnsi(esc + "?25l")
+	Show = newAnsi(esc + "?25h")
+	Report = newAnsi(esc + "6n")
 }

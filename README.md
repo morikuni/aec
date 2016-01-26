@@ -11,7 +11,7 @@ Some of these features may not work.
 
 Check [Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detail.
 
-### Move Cursor
+### Cursor
 
 - `Up(n)`
 - `Down(n)`
@@ -23,6 +23,9 @@ Check [Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detai
 - `Position(row, col)`
 - `Save`
 - `Restore`
+- `Hide`
+- `Show`
+- `Report`
 
 ### Erase
 
