@@ -88,6 +88,21 @@ func (builder *Builder) Restore() *Builder {
 	return builder.With(Restore)
 }
 
+// Hide is a syntax for Hide.
+func (builder *Builder) Hide() *Builder {
+	return builder.With(Hide)
+}
+
+// Show is a syntax for Show.
+func (builder *Builder) Show() *Builder {
+	return builder.With(Show)
+}
+
+// Report is a syntax for Report.
+func (builder *Builder) Report() *Builder {
+	return builder.With(Report)
+}
+
 // Bold is a syntax for Bold.
 func (builder *Builder) Bold() *Builder {
 	return builder.With(Bold)
