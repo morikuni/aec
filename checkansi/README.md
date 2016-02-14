@@ -1,5 +1,7 @@
 # checkansi
 
+![sample](./sample.gif)
+
 ## Usage
 
 ```bash
