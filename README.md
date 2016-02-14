@@ -13,9 +13,10 @@ go get github.com/morikuni/aec
 ## Features
 
 ANSI escape codes depend on terminal environment.  
-Some of these features may not work.
+Some of these features may not work.  
+Check supported Font-Style/Font-Color features with [checkansi](./checkansi).
 
-Check [Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detail.
+[Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) for more detail.
 
 ### Cursor
 
