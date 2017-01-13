@@ -9,13 +9,13 @@ type Builder struct {
 var EmptyBuilder *Builder
 
 // NewBuilder creates a Builder from existing ANSI.
-func NewBuilder(a ANSI) *Builder {
-	return &Builder{a}
+func NewBuilder(a ...ANSI) *Builder {
+	return &Builder{concat(a)}
 }
 
 // With is a syntax for With.
-func (builder *Builder) With(a ANSI) *Builder {
-	return NewBuilder(builder.ANSI.With(a))
+func (builder *Builder) With(a ...ANSI) *Builder {
+	return NewBuilder(builder.ANSI.With(a...))
 }
 
 // Up is a syntax for Up.

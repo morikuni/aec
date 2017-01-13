@@ -2,6 +2,7 @@ package aec
 
 import (
 	"fmt"
+	"strings"
 )
 
 const esc = "\x1b["
@@ -15,8 +16,8 @@ var empty = newAnsi("")
 type ANSI interface {
 	fmt.Stringer
 
-	// With adapts a given ANSI.
-	With(ANSI) ANSI
+	// With adapts given ANSIs.
+	With(...ANSI) ANSI
 
 	// Apply wraps given string in ANSI.
 	Apply(string) string
@@ -29,10 +30,8 @@ func newAnsi(s string) *ansiImpl {
 	return &r
 }
 
-func (a *ansiImpl) With(ansi ANSI) ANSI {
-	s := a.String() + ansi.String()
-	r := ansiImpl(s)
-	return &r
+func (a *ansiImpl) With(ansi ...ANSI) ANSI {
+	return concat(append([]ANSI{a}, ansi...))
 }
 
 func (a *ansiImpl) Apply(s string) string {
@@ -41,4 +40,20 @@ func (a *ansiImpl) Apply(s string) string {
 
 func (a *ansiImpl) String() string {
 	return string(*a)
+}
+
+// Apply wraps given string in ANSIs.
+func Apply(s string, ansi ...ANSI) string {
+	if len(ansi) == 0 {
+		return s
+	}
+	return concat(ansi).Apply(s)
+}
+
+func concat(ansi []ANSI) ANSI {
+	strs := make([]string, 0, len(ansi))
+	for _, p := range ansi {
+		strs = append(strs, p.String())
+	}
+	return newAnsi(strings.Join(strs, ""))
 }
