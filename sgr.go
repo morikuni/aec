@@ -49,7 +49,7 @@ func FullColorF(r, g, b uint8) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"38;2;%d;%d;%dm", r, g, b))
 }
 
-// FullColorB set the foreground color of text.
+// FullColorB set the background color of text.
 func FullColorB(r, g, b uint8) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"48;2;%d;%d;%dm", r, g, b))
 }

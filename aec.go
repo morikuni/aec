@@ -42,7 +42,7 @@ var (
 	Report ANSI = newAnsi(esc + "6n")
 )
 
-// Up moves up the cursor.
+// Up moves the cursor up by n positions (CUU).
 func Up(n uint) ANSI {
 	if n == 0 {
 		return empty
@@ -50,7 +50,7 @@ func Up(n uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dA", n))
 }
 
-// Down moves down the cursor.
+// Down moves the cursor down by n positions (CUD).
 func Down(n uint) ANSI {
 	if n == 0 {
 		return empty
@@ -58,7 +58,7 @@ func Down(n uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dB", n))
 }
 
-// Right moves right the cursor.
+// Right moves the cursor right by n positions (CUF).
 func Right(n uint) ANSI {
 	if n == 0 {
 		return empty
@@ -66,7 +66,7 @@ func Right(n uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dC", n))
 }
 
-// Left moves left the cursor.
+// Left moves the cursor left by n positions (CUB).
 func Left(n uint) ANSI {
 	if n == 0 {
 		return empty
@@ -74,7 +74,7 @@ func Left(n uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dD", n))
 }
 
-// NextLine moves down the cursor to head of a line.
+// NextLine moves the cursor down n lines and to the beginning of the line (CNL).
 func NextLine(n uint) ANSI {
 	if n == 0 {
 		return empty
@@ -82,7 +82,7 @@ func NextLine(n uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dE", n))
 }
 
-// PreviousLine moves up the cursor to head of a line.
+// PreviousLine moves the cursor up n lines and to the beginning of the line (CPL).
 func PreviousLine(n uint) ANSI {
 	if n == 0 {
 		return empty
@@ -90,27 +90,27 @@ func PreviousLine(n uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dF", n))
 }
 
-// Column set the cursor position to a given column.
+// Column sets the cursor position to a given column (CHA).
 func Column(col uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dG", col))
 }
 
-// Position set the cursor position to a given absolute position.
+// Position sets the cursor position to a given absolute position (CUP).
 func Position(row, col uint) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%d;%dH", row, col))
 }
 
-// EraseDisplay erases display by given EraseMode.
+// EraseDisplay erases the display using the given EraseMode (ED).
 func EraseDisplay(m EraseMode) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dJ", m))
 }
 
-// EraseLine erases lines by given EraseMode.
+// EraseLine erases the line using the given EraseMode (EL).
 func EraseLine(m EraseMode) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dK", m))
 }
 
-// ScrollUp scrolls up the page.
+// ScrollUp scrolls the display up by n lines (SU).
 func ScrollUp(n int) ANSI {
 	if n == 0 {
 		return empty
@@ -118,7 +118,7 @@ func ScrollUp(n int) ANSI {
 	return newAnsi(fmt.Sprintf(esc+"%dS", n))
 }
 
-// ScrollDown scrolls down the page.
+// ScrollDown scrolls the display down by n lines (SD).
 func ScrollDown(n int) ANSI {
 	if n == 0 {
 		return empty
