@@ -57,146 +57,90 @@ func FullColorB(r, g, b uint8) ANSI {
 // Style
 var (
 	// Bold set the text style to bold or increased intensity.
-	Bold ANSI
+	Bold ANSI = newSGR(1)
 
 	// Faint set the text style to faint.
-	Faint ANSI
+	Faint ANSI = newSGR(2)
 
 	// Italic set the text style to italic.
-	Italic ANSI
+	Italic ANSI = newSGR(3)
 
 	// Underline set the text style to underline.
-	Underline ANSI
+	Underline ANSI = newSGR(4)
 
 	// BlinkSlow set the text style to slow blink.
-	BlinkSlow ANSI
+	BlinkSlow ANSI = newSGR(5)
 
 	// BlinkRapid set the text style to rapid blink.
-	BlinkRapid ANSI
+	BlinkRapid ANSI = newSGR(6)
 
 	// Inverse swap the foreground color and background color.
-	Inverse ANSI
+	Inverse ANSI = newSGR(7)
 
 	// Conceal set the text style to conceal.
-	Conceal ANSI
+	Conceal ANSI = newSGR(8)
 
 	// CrossOut set the text style to crossed out.
-	CrossOut ANSI
+	CrossOut ANSI = newSGR(9)
 
 	// Frame set the text style to framed.
-	Frame ANSI
+	Frame ANSI = newSGR(51)
 
 	// Encircle set the text style to encircled.
-	Encircle ANSI
+	Encircle ANSI = newSGR(52)
 
 	// Overline set the text style to overlined.
-	Overline ANSI
+	Overline ANSI = newSGR(53)
 )
 
 // Foreground color of text.
 var (
-	// DefaultF is the default color of foreground.
-	DefaultF ANSI
+	// DefaultF is the default foreground color.
+	DefaultF ANSI = newSGR(39)
 
 	// Normal color
-	BlackF   ANSI
-	RedF     ANSI
-	GreenF   ANSI
-	YellowF  ANSI
-	BlueF    ANSI
-	MagentaF ANSI
-	CyanF    ANSI
-	WhiteF   ANSI
+	BlackF   ANSI = newSGR(30)
+	RedF     ANSI = newSGR(31)
+	GreenF   ANSI = newSGR(32)
+	YellowF  ANSI = newSGR(33)
+	BlueF    ANSI = newSGR(34)
+	MagentaF ANSI = newSGR(35)
+	CyanF    ANSI = newSGR(36)
+	WhiteF   ANSI = newSGR(37)
 
 	// Light color
-	LightBlackF   ANSI
-	LightRedF     ANSI
-	LightGreenF   ANSI
-	LightYellowF  ANSI
-	LightBlueF    ANSI
-	LightMagentaF ANSI
-	LightCyanF    ANSI
-	LightWhiteF   ANSI
+	LightBlackF   ANSI = newSGR(90)
+	LightRedF     ANSI = newSGR(91)
+	LightGreenF   ANSI = newSGR(92)
+	LightYellowF  ANSI = newSGR(93)
+	LightBlueF    ANSI = newSGR(94)
+	LightMagentaF ANSI = newSGR(95)
+	LightCyanF    ANSI = newSGR(96)
+	LightWhiteF   ANSI = newSGR(97)
 )
 
 // Background color of text.
 var (
-	// DefaultB is the default color of background.
-	DefaultB ANSI
+	// DefaultB is the default background color.
+	DefaultB ANSI = newSGR(49)
 
 	// Normal color
-	BlackB   ANSI
-	RedB     ANSI
-	GreenB   ANSI
-	YellowB  ANSI
-	BlueB    ANSI
-	MagentaB ANSI
-	CyanB    ANSI
-	WhiteB   ANSI
+	BlackB   ANSI = newSGR(40)
+	RedB     ANSI = newSGR(41)
+	GreenB   ANSI = newSGR(42)
+	YellowB  ANSI = newSGR(43)
+	BlueB    ANSI = newSGR(44)
+	MagentaB ANSI = newSGR(45)
+	CyanB    ANSI = newSGR(46)
+	WhiteB   ANSI = newSGR(47)
 
 	// Light color
-	LightBlackB   ANSI
-	LightRedB     ANSI
-	LightGreenB   ANSI
-	LightYellowB  ANSI
-	LightBlueB    ANSI
-	LightMagentaB ANSI
-	LightCyanB    ANSI
-	LightWhiteB   ANSI
+	LightBlackB   ANSI = newSGR(100)
+	LightRedB     ANSI = newSGR(101)
+	LightGreenB   ANSI = newSGR(102)
+	LightYellowB  ANSI = newSGR(103)
+	LightBlueB    ANSI = newSGR(104)
+	LightMagentaB ANSI = newSGR(105)
+	LightCyanB    ANSI = newSGR(106)
+	LightWhiteB   ANSI = newSGR(107)
 )
-
-func init() {
-	Bold = newSGR(1)
-	Faint = newSGR(2)
-	Italic = newSGR(3)
-	Underline = newSGR(4)
-	BlinkSlow = newSGR(5)
-	BlinkRapid = newSGR(6)
-	Inverse = newSGR(7)
-	Conceal = newSGR(8)
-	CrossOut = newSGR(9)
-
-	BlackF = newSGR(30)
-	RedF = newSGR(31)
-	GreenF = newSGR(32)
-	YellowF = newSGR(33)
-	BlueF = newSGR(34)
-	MagentaF = newSGR(35)
-	CyanF = newSGR(36)
-	WhiteF = newSGR(37)
-
-	DefaultF = newSGR(39)
-
-	BlackB = newSGR(40)
-	RedB = newSGR(41)
-	GreenB = newSGR(42)
-	YellowB = newSGR(43)
-	BlueB = newSGR(44)
-	MagentaB = newSGR(45)
-	CyanB = newSGR(46)
-	WhiteB = newSGR(47)
-
-	DefaultB = newSGR(49)
-
-	Frame = newSGR(51)
-	Encircle = newSGR(52)
-	Overline = newSGR(53)
-
-	LightBlackF = newSGR(90)
-	LightRedF = newSGR(91)
-	LightGreenF = newSGR(92)
-	LightYellowF = newSGR(93)
-	LightBlueF = newSGR(94)
-	LightMagentaF = newSGR(95)
-	LightCyanF = newSGR(96)
-	LightWhiteF = newSGR(97)
-
-	LightBlackB = newSGR(100)
-	LightRedB = newSGR(101)
-	LightGreenB = newSGR(102)
-	LightYellowB = newSGR(103)
-	LightBlueB = newSGR(104)
-	LightMagentaB = newSGR(105)
-	LightCyanB = newSGR(106)
-	LightWhiteB = newSGR(107)
-}

@@ -5,33 +5,41 @@ import "fmt"
 // EraseMode is listed in a variable EraseModes.
 type EraseMode uint
 
+// EraseModes is a list of EraseMode.
+var EraseModes = struct {
+	// All erase all.
+	All EraseMode
+
+	// Head erase to head.
+	Head EraseMode
+
+	// Tail erase to tail.
+	Tail EraseMode
+}{
+	Tail: 0,
+	Head: 1,
+	All:  2,
+}
+
 var (
-	// EraseModes is a list of EraseMode.
-	EraseModes struct {
-		// All erase all.
-		All EraseMode
+	// Save saves the cursor position. It uses both SCO ("ESC[s") and DEC
+	// ("ESC7") sequences as those were never standardized as part of the
+	// ANSI.
+	Save ANSI = newAnsi(esc + "s" + "\x1b7")
 
-		// Head erase to head.
-		Head EraseMode
-
-		// Tail erase to tail.
-		Tail EraseMode
-	}
-
-	// Save saves the cursor position.
-	Save ANSI
-
-	// Restore restores the cursor position.
-	Restore ANSI
+	// Restore restores the cursor position. It uses both SCO ("ESC[u") and
+	// DEC ("ESC8") sequences as those were never standardized as part of
+	// the ANSI.
+	Restore ANSI = newAnsi(esc + "u" + "\x1b8")
 
 	// Hide hides the cursor.
-	Hide ANSI
+	Hide ANSI = newAnsi(esc + "?25l")
 
 	// Show shows the cursor.
-	Show ANSI
+	Show ANSI = newAnsi(esc + "?25h")
 
 	// Report reports the cursor position.
-	Report ANSI
+	Report ANSI = newAnsi(esc + "6n")
 )
 
 // Up moves up the cursor.
@@ -116,24 +124,4 @@ func ScrollDown(n int) ANSI {
 		return empty
 	}
 	return newAnsi(fmt.Sprintf(esc+"%dT", n))
-}
-
-func init() {
-	EraseModes = struct {
-		All  EraseMode
-		Head EraseMode
-		Tail EraseMode
-	}{
-		Tail: 0,
-		Head: 1,
-		All:  2,
-	}
-
-	// Save use both SCO (ESC[s) and DEC (ESC7) sequences as those were never standardised as part of the ANSI
-	Save = newAnsi(esc + "s" + "\x1b7")
-	// Restore use both SCO (ESC[u) and DEC (ESC8) and DEC sequences as those were never standardised as part of the ANSI
-	Restore = newAnsi(esc + "u" + "\x1b8")
-	Hide = newAnsi(esc + "?25l")
-	Show = newAnsi(esc + "?25h")
-	Report = newAnsi(esc + "6n")
 }
