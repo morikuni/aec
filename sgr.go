@@ -1,8 +1,6 @@
 package aec
 
-import (
-	"fmt"
-)
+import "strconv"
 
 // RGB3Bit is a 3bit RGB color.
 type RGB3Bit uint8
@@ -10,8 +8,30 @@ type RGB3Bit uint8
 // RGB8Bit is a 8bit RGB color.
 type RGB8Bit uint8
 
-func newSGR(n uint) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", n))
+func newSGR(n uint8) ANSI {
+	return sgr1("", n)
+}
+
+func sgr1(prefix string, n uint8) ANSI {
+	buf := make([]byte, 0, len(esc)+len(prefix)+3+1)
+	buf = append(buf, esc...)
+	buf = append(buf, prefix...)
+	buf = strconv.AppendUint(buf, uint64(n), 10)
+	buf = append(buf, 'm')
+	return newAnsi(string(buf))
+}
+
+func newFullColor(prefix string, a, b, c uint8) ANSI {
+	buf := make([]byte, 0, len(esc)+len(prefix)+3+1+3+1+3+1)
+	buf = append(buf, esc...)
+	buf = append(buf, prefix...)
+	buf = strconv.AppendUint(buf, uint64(a), 10)
+	buf = append(buf, ';')
+	buf = strconv.AppendUint(buf, uint64(b), 10)
+	buf = append(buf, ';')
+	buf = strconv.AppendUint(buf, uint64(c), 10)
+	buf = append(buf, 'm')
+	return newAnsi(string(buf))
 }
 
 // NewRGB3Bit create a RGB3Bit from given RGB.
@@ -26,32 +46,32 @@ func NewRGB8Bit(r, g, b uint8) RGB8Bit {
 
 // Color3BitF set the foreground color of text.
 func Color3BitF(c RGB3Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", c+30))
+	return newSGR(uint8(c + 30))
 }
 
 // Color3BitB set the background color of text.
 func Color3BitB(c RGB3Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", c+40))
+	return newSGR(uint8(c + 40))
 }
 
 // Color8BitF set the foreground color of text.
 func Color8BitF(c RGB8Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"38;5;%dm", c))
+	return sgr1("38;5;", uint8(c))
 }
 
 // Color8BitB set the background color of text.
 func Color8BitB(c RGB8Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"48;5;%dm", c))
+	return sgr1("48;5;", uint8(c))
 }
 
 // FullColorF set the foreground color of text.
 func FullColorF(r, g, b uint8) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"38;2;%d;%d;%dm", r, g, b))
+	return newFullColor("38;2;", r, g, b)
 }
 
 // FullColorB set the background color of text.
 func FullColorB(r, g, b uint8) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"48;2;%d;%d;%dm", r, g, b))
+	return newFullColor("48;2;", r, g, b)
 }
 
 // Style
