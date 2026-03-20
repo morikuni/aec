@@ -74,12 +74,12 @@ func (builder *Builder) Position(row, col uint) *Builder {
 // Erasing and scrolling.
 
 // EraseDisplay erases the display using the given mode.
-func (builder *Builder) EraseDisplay(m EraseMode) *Builder {
+func (builder *Builder) EraseDisplay(m EraseDisplayMode) *Builder {
 	return builder.With(EraseDisplay(m))
 }
 
 // EraseLine erases the current line using the given mode.
-func (builder *Builder) EraseLine(m EraseMode) *Builder {
+func (builder *Builder) EraseLine(m EraseLineMode) *Builder {
 	return builder.With(EraseLine(m))
 }
 

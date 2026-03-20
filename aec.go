@@ -21,6 +21,31 @@ var EraseModes = struct {
 	All:  2,
 }
 
+// EraseDisplayMode is the parameter for the ED (Erase in Display, CSI Ps J)
+// control sequence. It defines which portion of the display should be erased.
+//
+// This is an alias of [EraseMode] for backward compatibility.
+type EraseDisplayMode = EraseMode
+
+const (
+	EraseDisplayTail       EraseDisplayMode = 0 // erase from cursor to end of display
+	EraseDisplayHead       EraseDisplayMode = 1 // erase from start of display to cursor
+	EraseDisplayAll        EraseDisplayMode = 2 // erase entire display
+	EraseDisplaySavedLines EraseDisplayMode = 3 // erase saved lines (scrollback), non-standard but widely supported
+)
+
+// EraseLineMode is the parameter for the EL (Erase in Line, CSI Ps K)
+// control sequence. It defines which portion of the current line should be erased.
+//
+// This is an alias of [EraseMode] for backward compatibility.
+type EraseLineMode = EraseMode
+
+const (
+	EraseLineTail EraseLineMode = 0 // erase from cursor to end of line
+	EraseLineHead EraseLineMode = 1 // erase from start of line to cursor
+	EraseLineAll  EraseLineMode = 2 // erase entire line
+)
+
 // Cursor control and reporting sequences.
 //
 // Includes CSI sequences defined by ECMA-48 / ISO 6429, DEC private modes,
@@ -99,13 +124,13 @@ func Position(row, col uint) ANSI {
 	return newAnsi(fmt.Sprintf(Esc+"%d;%dH", row, col))
 }
 
-// EraseDisplay erases the display using the given EraseMode (ED).
-func EraseDisplay(m EraseMode) ANSI {
+// EraseDisplay erases the display using the given [EraseDisplayMode] (ED).
+func EraseDisplay(m EraseDisplayMode) ANSI {
 	return newAnsi(fmt.Sprintf(Esc+"%dJ", m))
 }
 
-// EraseLine erases the line using the given EraseMode (EL).
-func EraseLine(m EraseMode) ANSI {
+// EraseLine erases the line using the given [EraseLineMode] (EL).
+func EraseLine(m EraseLineMode) ANSI {
 	return newAnsi(fmt.Sprintf(Esc+"%dK", m))
 }
 
