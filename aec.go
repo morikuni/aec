@@ -21,25 +21,24 @@ var EraseModes = struct {
 	All:  2,
 }
 
+// Cursor control and reporting sequences.
+//
+// Includes CSI sequences defined by ECMA-48 / ISO 6429, DEC private modes,
+// and legacy DEC/SCO save and restore sequences.
 var (
-	// Save saves the cursor position. It uses both SCO ("ESC[s") and DEC
-	// ("ESC7") sequences as those were never standardized as part of the
-	// ANSI.
-	Save ANSI = newAnsi(esc + "s" + "\x1b7")
+	// Cursor save and restore sequences.
+	//
+	// These use both SCO ("ESC[s"/"ESC[u") and DEC ("ESC 7"/"ESC 8")
+	// sequences for compatibility. They are not standardized in ECMA-48.
+	Save    ANSI = newAnsi(esc + "s" + "\x1b7") // saves the cursor position.
+	Restore ANSI = newAnsi(esc + "u" + "\x1b8") // restores the cursor position.
 
-	// Restore restores the cursor position. It uses both SCO ("ESC[u") and
-	// DEC ("ESC8") sequences as those were never standardized as part of
-	// the ANSI.
-	Restore ANSI = newAnsi(esc + "u" + "\x1b8")
+	// Cursor visibility (DEC private mode 25).
+	Hide ANSI = newAnsi(esc + "?25l") // hides the cursor.
+	Show ANSI = newAnsi(esc + "?25h") // shows the cursor.
 
-	// Hide hides the cursor.
-	Hide ANSI = newAnsi(esc + "?25l")
-
-	// Show shows the cursor.
-	Show ANSI = newAnsi(esc + "?25h")
-
-	// Report reports the cursor position.
-	Report ANSI = newAnsi(esc + "6n")
+	// Cursor position report (DSR 6, ECMA-48).
+	Report ANSI = newAnsi(esc + "6n") // requests the cursor position.
 )
 
 // Up moves the cursor up by n positions (CUU).
