@@ -11,7 +11,7 @@ type RGB3Bit uint8
 type RGB8Bit uint8
 
 func newSGR(n uint) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dm", n))
 }
 
 // NewRGB3Bit returns a 3-bit color from the given RGB values.
@@ -26,32 +26,32 @@ func NewRGB8Bit(r, g, b uint8) RGB8Bit {
 
 // Color3BitF returns an SGR sequence that sets the foreground color.
 func Color3BitF(c RGB3Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", c+30))
+	return newAnsi(fmt.Sprintf(Esc+"%dm", c+30))
 }
 
 // Color3BitB returns an SGR sequence that sets the background color.
 func Color3BitB(c RGB3Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dm", c+40))
+	return newAnsi(fmt.Sprintf(Esc+"%dm", c+40))
 }
 
 // Color8BitF returns an SGR sequence that sets the 8-bit foreground color.
 func Color8BitF(c RGB8Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"38;5;%dm", c))
+	return newAnsi(fmt.Sprintf(Esc+"38;5;%dm", c))
 }
 
 // Color8BitB returns an SGR sequence that sets the 8-bit background color.
 func Color8BitB(c RGB8Bit) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"48;5;%dm", c))
+	return newAnsi(fmt.Sprintf(Esc+"48;5;%dm", c))
 }
 
 // FullColorF returns an SGR sequence that sets the 24-bit foreground color.
 func FullColorF(r, g, b uint8) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"38;2;%d;%d;%dm", r, g, b))
+	return newAnsi(fmt.Sprintf(Esc+"38;2;%d;%d;%dm", r, g, b))
 }
 
 // FullColorB returns an SGR sequence that sets the 24-bit background color.
 func FullColorB(r, g, b uint8) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"48;2;%d;%d;%dm", r, g, b))
+	return newAnsi(fmt.Sprintf(Esc+"48;2;%d;%d;%dm", r, g, b))
 }
 
 // Text styles and decorations, represented as Select Graphic Rendition (SGR)

@@ -30,15 +30,15 @@ var (
 	//
 	// These use both SCO ("ESC[s"/"ESC[u") and DEC ("ESC 7"/"ESC 8")
 	// sequences for compatibility. They are not standardized in ECMA-48.
-	Save    ANSI = newAnsi(esc + "s" + "\x1b7") // saves the cursor position.
-	Restore ANSI = newAnsi(esc + "u" + "\x1b8") // restores the cursor position.
+	Save    ANSI = newAnsi(Esc + "s" + "\x1b7") // saves the cursor position.
+	Restore ANSI = newAnsi(Esc + "u" + "\x1b8") // restores the cursor position.
 
 	// Cursor visibility (DEC private mode 25).
-	Hide ANSI = newAnsi(esc + "?25l") // hides the cursor.
-	Show ANSI = newAnsi(esc + "?25h") // shows the cursor.
+	Hide ANSI = newAnsi(Esc + "?25l") // hides the cursor.
+	Show ANSI = newAnsi(Esc + "?25h") // shows the cursor.
 
 	// Cursor position report (DSR 6, ECMA-48).
-	Report ANSI = newAnsi(esc + "6n") // requests the cursor position.
+	Report ANSI = newAnsi(Esc + "6n") // requests the cursor position.
 )
 
 // Up moves the cursor up by n positions (CUU).
@@ -46,7 +46,7 @@ func Up(n uint) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dA", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dA", n))
 }
 
 // Down moves the cursor down by n positions (CUD).
@@ -54,7 +54,7 @@ func Down(n uint) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dB", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dB", n))
 }
 
 // Right moves the cursor right by n positions (CUF).
@@ -62,7 +62,7 @@ func Right(n uint) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dC", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dC", n))
 }
 
 // Left moves the cursor left by n positions (CUB).
@@ -70,7 +70,7 @@ func Left(n uint) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dD", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dD", n))
 }
 
 // NextLine moves the cursor down n lines and to the beginning of the line (CNL).
@@ -78,7 +78,7 @@ func NextLine(n uint) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dE", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dE", n))
 }
 
 // PreviousLine moves the cursor up n lines and to the beginning of the line (CPL).
@@ -86,27 +86,27 @@ func PreviousLine(n uint) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dF", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dF", n))
 }
 
 // Column sets the cursor position to a given column (CHA).
 func Column(col uint) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dG", col))
+	return newAnsi(fmt.Sprintf(Esc+"%dG", col))
 }
 
 // Position sets the cursor position to a given absolute position (CUP).
 func Position(row, col uint) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%d;%dH", row, col))
+	return newAnsi(fmt.Sprintf(Esc+"%d;%dH", row, col))
 }
 
 // EraseDisplay erases the display using the given EraseMode (ED).
 func EraseDisplay(m EraseMode) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dJ", m))
+	return newAnsi(fmt.Sprintf(Esc+"%dJ", m))
 }
 
 // EraseLine erases the line using the given EraseMode (EL).
 func EraseLine(m EraseMode) ANSI {
-	return newAnsi(fmt.Sprintf(esc+"%dK", m))
+	return newAnsi(fmt.Sprintf(Esc+"%dK", m))
 }
 
 // ScrollUp scrolls the display up by n lines (SU).
@@ -114,7 +114,7 @@ func ScrollUp(n int) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dS", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dS", n))
 }
 
 // ScrollDown scrolls the display down by n lines (SD).
@@ -122,5 +122,5 @@ func ScrollDown(n int) ANSI {
 	if n == 0 {
 		return empty
 	}
-	return newAnsi(fmt.Sprintf(esc+"%dT", n))
+	return newAnsi(fmt.Sprintf(Esc+"%dT", n))
 }

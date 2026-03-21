@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// esc is the ANSI escape sequence introducer (ESC).
-const esc = "\x1b["
+// Esc is the ANSI escape sequence introducer (ESC).
+const Esc = "\x1b["
 
 // Reset clears all SGR attributes.
 const Reset = "\x1b[0m"
